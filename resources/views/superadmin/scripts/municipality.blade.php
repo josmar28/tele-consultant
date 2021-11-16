@@ -31,7 +31,7 @@
 		var id = $("#muni_id").val();
 		if(toDelete) {
 			$('#muni_form').ajaxSubmit({
-	            url:  "/municipality-delete/"+id+"",
+	            url:  "{{ url('/municipality-delete') }}/"+id,
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){

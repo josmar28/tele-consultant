@@ -69,7 +69,7 @@
 		if(toDelete) {
 			var id = $("#facility_id").val();
 			$('#facility_form').ajaxSubmit({
-	            url:  "facility-delete/"+id+"",
+	            url:  "{{ url('/facility-delete') }}/"+id,
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){

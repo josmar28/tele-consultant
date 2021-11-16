@@ -91,10 +91,10 @@ if($searchKeyword){
                                     </td>
                                     <td>
                                         <?php
-                                            $status = ($row->login_status=='login') ? 'Login': 'Logout';
+                                            $status = ($row->login_status=='login') ? 'Login': 'Logout' ;
                                             $class = ($row->login_status=='login') ? 'text-success': 'text-danger';
                                         ?>
-                                        <strong><span class="{{ $class }}">{{ $status }}</span></strong>
+                                        <strong><span class="{{ $class }}">{{ $row->status=='deactivate' ? 'Deactivate' : $status }}</span></strong>
                                     </td>
                                     <td class="text-warning">
                                         <?php

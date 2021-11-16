@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{{ asset('img/dohro12logo2.png') }}">
+    <link rel="icon" href="{{ asset('public/img/dohro12logo2.png') }}">
     <meta http-equiv="cache-control" content="max-age=0" />
     <title>DOH CHD XII – Tele Consultation System</title>
     <!-- <title>{{ (isset($title)) ? $title : 'Referral System'}}</title> -->
@@ -126,8 +126,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse" style="font-size: 13px;">
             <ul class="nav navbar-nav">
-                <li><a href="/"><i class="fa fa-home"></i> Dashboard</a></li>
                 @if($user->level=='superadmin')
+                <li><a href="{{ asset('superadmin') }}"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book"></i>&nbsp; Library <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
@@ -139,7 +139,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i>&nbsp; Manage <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ asset('users') }}"><i class="fas fa-users"></i>&nbsp; Users</a></li>
+                        <li><a href="{{ asset('/users') }}"><i class="fas fa-users"></i>&nbsp; Users</a></li>
                         <li><a href="#"><i class="fas fa-user-check"></i>&nbsp; User Approval</a></li>
                         <li><a href="#"><i class="fa fa-list-alt"></i>Role/Permission</a></li>
                         <li><a href="{{ asset('facilities') }}"><i class="fa fa-hospital-o"></i>&nbsp; Facilities</a></li>
@@ -165,6 +165,7 @@
                 @endif
                 <!-- for doctors -->
                 @if($user->level=='doctor')
+                <li><a href="{{ asset('doctor') }}"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-thumbs-up"></i> Telemed Approval <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
@@ -176,6 +177,7 @@
                 @endif
                 <!-- for rhu -->
                 @if($user->level=='admin')
+                <li><a href="{{ asset('admin') }}"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-address-book"></i> RHU <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">

@@ -9,6 +9,10 @@
       	<form id="user_form" method="POST">
       		{{ csrf_field() }}
       		<input type="hidden" id="user_id" class="form-control" value="" name="user_id">
+      		<div class="text-right">
+            <button id="deactBtn" type="submit" class="btn btn-danger hide"><i class="fas fa-user-slash"></i> Deactivate User</button>
+            <button id="actBtn" type="submit" class="btn btn-success hide"><i class="fas fa-user-check"></i> Activate User</button>
+          </div>
       		<div class="form-group">
 		        <label>First Name:</label>
 		        <input type="text" class="form-control" value="" name="fname" required="">
@@ -48,8 +52,6 @@
 		        <select class="form-control" name="level" required="">
 		            <option value="">Select options</option>
 		            <option value="admin">Admin</option>
-		            <option value="doctor">Doctor</option>
-		            <option value="doctor">Patient</option>
 		        </select>
 		    </div>
 		    <hr>

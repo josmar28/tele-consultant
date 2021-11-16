@@ -61,17 +61,21 @@ class LoginController extends Controller
                 }
                 if($login->level=='superadmin')
                     return redirect('superadmin');
-                if($login->level=='admin')
-                    return redirect('admin');
-                else if($login->level=='doctor')
+                if($login->level=='admin' && $login->status=='active')
+                    return redirect('admin' && $login->status=='active');
+                else if($login->level=='doctor' && $login->status=='active')
                     return redirect('doctor');
-                else if($login->level=='officer')
+                else if($login->level=='officer' && $login->status=='active')
                     return redirect('officer');
-                else if($login->level=='patient')
+                else if($login->level=='patient' && $login->status=='active')
                     return redirect('patient');
                 else{
                     Session::forget('auth');
-                    return Redirect::back()->withErrors(['msg' => 'You don\'t have access in this system.']);
+                    if($login->status=='deactivate') {
+                        return Redirect::back()->withErrors(['msg' => 'Your account was deactivated by administrator.']);
+                    } else {
+                        return Redirect::back()->withErrors(['msg' => 'You don\'t have access in this system.']);
+                    }
                 }
             }
             else{
@@ -100,5 +104,10 @@ class LoginController extends Controller
         }
 
         return $login->id;
+    }
+
+    protected function credentials(Request $request)
+    {
+        return $request->only('username', 'password');
     }
 }

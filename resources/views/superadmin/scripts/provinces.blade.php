@@ -31,7 +31,7 @@
 		var id = $("#province_id").val();
 		if(toDelete) {
 			$('#province_form').ajaxSubmit({
-	            url:  "province-delete/"+id+"",
+	            url:  "{{ url('/province-delete') }}/"+id,
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){
