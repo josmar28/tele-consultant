@@ -10,25 +10,44 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::Auth();
 Route::get('/', 'Auth\LoginController@index');
+Route::post('login', 'Auth\LoginController@login');
+Route::get('/logout', function(){
+    $user = \Illuminate\Support\Facades\Session::get('auth');
+    \Illuminate\Support\Facades\Session::flush();
+    if(isset($user)){
+        \App\User::where('id',$user->id)
+            ->update([
+                'login_status' => 'logout'
+            ]);
+        $logout = date('Y-m-d H:i:s');
+        $logoutId = \App\Login::where('user_id',$user->id)
+            ->orderBy('id','desc')
+            ->first()
+            ->id;
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-// Admin Module
-Route::get('/users', 'Admin\ManageController@indexUser');
-Route::post('/user-store', 'Admin\ManageController@storeUser');
-Route::get('/facilities', 'Admin\ManageController@indexFacility');
-Route::get('/facilities/{id}/{type}', 'Admin\ManageController@getMunandBrgy');
-Route::post('/facility-store', 'Admin\ManageController@storeFacility');
-Route::post('/facility-delete/{id}', 'Admin\ManageController@deleteFacility');
-Route::get('/provinces', 'Admin\ManageController@indexProvince');
-Route::post('/province-store', 'Admin\ManageController@storeProvince');
-Route::post('/province-delete/{id}', 'Admin\ManageController@deleteProvince');
-Route::match(['GET','POST'],'/municipality/{province_id}/{province_name}','Admin\ManageController@viewMunicipality');
-Route::post('/municipality-store', 'Admin\ManageController@storeMunicipality');
-Route::post('/municipality-delete/{id}', 'Admin\ManageController@deleteMunicipality');
-Route::match(['GET','POST'],'/barangay/{prov_id}/{prov_name}/{mun_id}/{mun_name}','Admin\ManageController@viewBarangay');
+        \App\Login::where('id',$logoutId)
+            ->update([
+                'status' => 'login_off',
+                'logout' => $logout
+            ]);
+    }
+    return redirect('/');
+});
+// SuperSuperadmin Module
+Route::get('superadmin','Superadmin\HomeController@index');
+Route::get('/users', 'Superadmin\ManageController@indexUser');
+Route::post('/user-store', 'Superadmin\ManageController@storeUser');
+Route::get('/facilities', 'Superadmin\ManageController@indexFacility');
+Route::get('/facilities/{id}/{type}', 'Superadmin\ManageController@getMunandBrgy');
+Route::post('/facility-store', 'Superadmin\ManageController@storeFacility');
+Route::post('/facility-delete/{id}', 'Superadmin\ManageController@deleteFacility');
+Route::get('/provinces', 'Superadmin\ManageController@indexProvince');
+Route::post('/province-store', 'Superadmin\ManageController@storeProvince');
+Route::post('/province-delete/{id}', 'Superadmin\ManageController@deleteProvince');
+Route::match(['GET','POST'],'/municipality/{province_id}/{province_name}','Superadmin\ManageController@viewMunicipality');
+Route::post('/municipality-store', 'Superadmin\ManageController@storeMunicipality');
+Route::post('/municipality-delete/{id}', 'Superadmin\ManageController@deleteMunicipality');
+Route::match(['GET','POST'],'/barangay/{prov_id}/{prov_name}/{mun_id}/{mun_name}','Superadmin\ManageController@viewBarangay');
 

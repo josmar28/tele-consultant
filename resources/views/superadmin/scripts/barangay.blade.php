@@ -1,6 +1,6 @@
 <script>
-	var provinces = {!! json_encode($provinces->toArray()) !!};
-	var toDelete;
+  var barangays = {!! json_encode($barangays->toArray()) !!};
+  var toDelete;
 	@if(Session::get('action_made'))
         Lobibox.notify('success', {
             title: "",
@@ -23,15 +23,15 @@
             Session::put("delete_action",false);
         ?>
     @endif
-	$( "#deleteBtn" ).click(function() {
+    $( "#deleteBtn" ).click(function() {
 		toDelete = 'yes';
 	});
-	$('#province_form').on('submit',function(e){
+	$('#brgy_form').on('submit',function(e){
 		e.preventDefault();
-		var id = $("#province_id").val();
+		var id = $("#brgy_id").val();
 		if(toDelete) {
-			$('#province_form').ajaxSubmit({
-	            url:  "province-delete/"+id+"",
+			$('#muni_form').ajaxSubmit({
+	            url:  "/barangay-delete/"+id+"",
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){
@@ -40,8 +40,8 @@
 	            },
 	        });
 		} else {
-			$('#province_form').ajaxSubmit({
-	            url:  "{{ url('/province-store') }}",
+			$('#brgy_form').ajaxSubmit({
+	            url:  "{{ url('/barangay-store') }}",
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){
@@ -52,24 +52,23 @@
 		}
 	});
 
-	function getDataFromProvince(ele) {
-		$("#myModalLabel").html('Update Province');
-    	$("#province_id").val($(ele).data('id'));
+	function getDataFromBrgy(ele) {
+		$("#myModalLabel").html('Update Barangay');
+    	$("#brgy_id").val($(ele).data('id'));
     	const edit = [];
-    	$.each(provinces, function(key, value) {
+    	$.each(barangays, function(key, value) {
 	        if(value.id == $(ele).data('id')) {
 	        	edit.push(value);
 	        }
 	    });
-
-	    $("input[name=prov_name]").val(edit[0].prov_name);
-	    $("input[name=prov_psgc]").val(edit[0].prov_psgc);
+	    $("input[name=brg_name]").val(edit[0].brg_name);
+	    $("input[name=brg_psgc]").val(edit[0].brg_psgc);
 	    $("#deleteBtn").removeClass("hide");
 	}
-	$('#province_modal').on('hidden.bs.modal', function () {
-		$("input[name=prov_name]").val('');
-	    $("input[name=prov_psgc]").val('');
-	    $("#province_id").val('');
-	    $("#deleteBtn").addClass("hide");
+	$('#brgy_modal').on('hidden.bs.modal', function () {
+		$("#myModalLabel").html('Add Barangay');
+		$("input[name=brg_name]").val('');
+	    $("input[name=brg_psgc]").val('');
+	    $("#deleteBtn").removeClass("hide");
 	});
 </script>

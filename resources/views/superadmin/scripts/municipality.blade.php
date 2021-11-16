@@ -31,7 +31,7 @@
 		var id = $("#muni_id").val();
 		if(toDelete) {
 			$('#muni_form').ajaxSubmit({
-	            url:  "municipality-delete/"+id+"",
+	            url:  "/municipality-delete/"+id+"",
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){
@@ -69,6 +69,7 @@
 	}
 
 	$('#municipal_modal').on('hidden.bs.modal', function () {
+		$("#myModalLabel").html('Add Municipality');
 		$("input[name=muni_name]").val('');
 	    $("input[name=muni_psgc]").val('');
 	    $("input[name=zipcode]").val('');

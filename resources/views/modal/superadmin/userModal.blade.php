@@ -47,8 +47,9 @@
 		        <label>Level:</label>
 		        <select class="form-control" name="level" required="">
 		            <option value="">Select options</option>
+		            <option value="admin">Admin</option>
 		            <option value="doctor">Doctor</option>
-		            <option value="rhu">RHU Staff</option>
+		            <option value="doctor">Patient</option>
 		        </select>
 		    </div>
 		    <hr>
