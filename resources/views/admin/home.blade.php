@@ -6,7 +6,7 @@
         <div class="box-body">
             <div class="box-header with-border">
                 <h3>
-                    Welcome to Tele Consultation! Officer Dashboard
+                    Welcome to Tele Consultation! Admin Dashboard
                 </h3>
             </div>
         </div>
