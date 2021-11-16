@@ -51,3 +51,12 @@ Route::post('/municipality-store', 'Superadmin\ManageController@storeMunicipalit
 Route::post('/municipality-delete/{id}', 'Superadmin\ManageController@deleteMunicipality');
 Route::match(['GET','POST'],'/barangay/{prov_id}/{prov_name}/{mun_id}/{mun_name}','Superadmin\ManageController@viewBarangay');
 
+//Admin Module
+Route::get('admin','Admin\HomeController@index');
+
+// Doctor Module
+Route::get('doctor','Doctor\HomeController@index');
+
+// Patient Module
+Route::get('patient','Patient\HomeController@index');
+
