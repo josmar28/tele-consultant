@@ -1,5 +1,5 @@
 <?php
-$user = Auth::user();
+$user = Session::get('auth');
 $searchKeyword = Session::get('searchKeyword');
 $keyword = '';
 if($searchKeyword){
@@ -21,7 +21,7 @@ if($searchKeyword){
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3>{{ $title }}</h3>
-                <form action="{{ url('/users') }}" method="GET">
+                <form action="{{ asset('/users') }}" method="GET">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-4">
@@ -124,9 +124,9 @@ if($searchKeyword){
             </div>
         </div>
     </div>
-    @include('modal.admin.userModal')
+    @include('modal.superadmin.userModal')
 @endsection
 @section('js')
-@include('admin.scripts.users')
+@include('superadmin.scripts.users')
 @endsection
 

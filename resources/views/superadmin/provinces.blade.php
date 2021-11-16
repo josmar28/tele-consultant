@@ -13,34 +13,31 @@
     <div class="box box-success">
         <div class="box-header with-border">
             <div class="pull-right">
-                <form action="{{ url('municipality').'/'.$province_id.'/'.$province_name }}" method="POST" class="form-inline">
+                <form action="{{ asset('provinces') }}" method="GET" class="form-inline">
                     {{ csrf_field() }}
                     <div class="form-group-lg" style="margin-bottom: 10px;">
-                        <input type="text" class="form-control" name="keyword_muncity" placeholder="Search municipality..." value="{{ Session::get("keyword_muncity") }}">
+                        <input type="text" class="form-control" name="keyword" placeholder="Search province..." value="{{ Session::get("keyword") }}">
                         <button type="submit" class="btn btn-success btn-sm btn-flat">
                             <i class="fa fa-search"></i> Search
                         </button>
                         <button type="submit" value="view_all" name="view_all" class="btn btn-warning btn-sm btn-flat">
                             <i class="fa fa-eye"></i> View All
                         </button>
-                        <a data-toggle="modal" class="btn btn-info btn-sm btn-flat" data-target="#municipal_modal">
-                            <i class="fa fa-hospital-o"></i> Add Municipality
+                        <a data-toggle="modal" class="btn btn-info btn-sm btn-flat" data-target="#province_modal">
+                            <i class="fa fa-hospital-o"></i> Add Province
                         </a>
                     </div>
                 </form>
             </div>
-            <h1>{{ $title }}</h1>
-            <b class="text-yellow" style="font-size: 13pt;">{{ $province_name }} Province</b>
+            <h3>{{ $title }}</h3>
         </div>
         <div class="box-body">
             @if(count($data)>0)
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <tr class="bg-black">
-                            <th>Municipality Name</th>
-                            <th>Municipality Code</th>
-                            <th>Zipcode</th>
-                            <th width="5%;">Option</th>
+                            <th>Province Name</th>
+                            <th>Province Code</th>
                         </tr>
                         @foreach($data as $row)
                             <tr>
@@ -51,21 +48,15 @@
                                            data-toggle="modal"
                                            data-id= "{{ $row->id }}"
                                            class="title-info update_info"
-                                           data-target="#municipal_modal" 
-                                           onclick="getDataFromMunicipality(this)" 
+                                           data-target="#province_modal" 
+                                           onclick="getDataFromProvince(this)" 
                                         >
-                                            {{ $row->muni_name }}
+                                            {{ $row->prov_name }}
                                         </a>
                                     </b>
                                 </td>
                                 <td>
-                                    <b class="text-green">{{ $row->muni_psgc }}</b>
-                                </td>
-                                <td>{{ $row->zipcode }}</td>
-                                <td>
-                                    <a href="{{ url('barangay').'/'.$province_id.'/'.$province_name.'/'.$row->muni_psgc.'/'.$row->muni_name }}" class="btn btn-block btn-social btn-instagram" target="_blank">
-                                        <i class="fas fa-external-link-alt"></i> Show Barangay
-                                    </a>
+                                    <b class="text-green">{{ $row->prov_psgc }}</b>
                                 </td>
                             </tr>
                         @endforeach
@@ -77,7 +68,7 @@
             @else
                 <div class="alert alert-warning">
                     <span class="text-warning">
-                        <i class="fa fa-warning"></i> No Municipality found!
+                        <i class="fa fa-warning"></i> No Province found!
                     </span>
                 </div>
             @endif
@@ -85,8 +76,9 @@
     </div>
 </div>
 
-    @include('modal.admin.municipalityModal')
+    @include('modal.superadmin.provinceModal')
 @endsection
 @section('js')
-    @include('admin.scripts.municipality')
+ @include('superadmin.scripts.provinces')
 @endsection
+

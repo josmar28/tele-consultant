@@ -10,21 +10,21 @@ $dateNow = date('Y-m-d');
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.min.css') }}">
-    <link rel="icon" href="{{ asset('img/dohro12logo2.png') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/AdminLTE.min.css') }}">
+    <link rel="icon" href="{{ asset('public/img/dohro12logo2.png') }}">
   </head>
   <body class="hold-transition login-page">
    <div class="login-box">
         <center>
-           <span> <img src="{{ asset('img/doh.png') }}" style="width: 25%"/>
-            <img src="{{ asset('img/dohro12logo2.png') }}" style="width: 25%"/><br>
+           <span> <img src="{{ asset('public/img/doh.png') }}" style="width: 25%"/>
+            <img src="{{ asset('public/img/dohro12logo2.png') }}" style="width: 25%"/><br>
             <label style="font-size: 9pt;">DOH-CHD XII SOCCSKSARGEN</label>
             <label style="font-size: 9pt;">Tele Consultation</label></span>
         </center>
-          <form role="form" method="POST" action="{{ route('login') }}" class="form-submit" >
+          <form role="form" method="POST" action="{{ asset('login') }}" class="form-submit" >
               {{ csrf_field() }}
               <div class="login-box-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -32,8 +32,8 @@ $dateNow = date('Y-m-d');
                     <input id="username" autocomplete="off" type="text" placeholder="Login ID" autofocus class="form-control" name="username" value="{{ Session::get('username') }}">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     <span class="help-block">
-                        @if(Session::has('error'))
-                            <strong>{{ Session::get('error') }}</strong>
+                        @if($errors->any())
+                            <strong>{{$errors->first()}}</strong>
                         @endif
                     </span>
                   </div>
@@ -66,9 +66,9 @@ $dateNow = date('Y-m-d');
     </div><!-- /.login-box -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
     <!-- Bootstrap 3.3.5 -->
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap.min.js') }}"></script>
     <script>
         $('.btn-submit').on('click',function(){
             $(this).html('<i class="fa fa-spinner fa-spin"></i> Validating...');

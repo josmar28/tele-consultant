@@ -1,11 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    label {
+        padding: 0px;
+    }
+    .form-group {
+        margin-bottom: 10px;
+    }
+</style>
 <div class="container-fluid">
     <div class="box box-success">
         <div class="box-header with-border">
             <div class="pull-right">
-                <form action="{{ asset('admin/barangay').'/'.$province_id.'/'.$muncity_id }}" method="POST" class="form-inline">
+                <form action="{{ asset('barangay').'/'.$province_id.'/'.$province_name.'/'.$muncity_id.'/'.$muncity_name }}" method="POST" class="form-inline">
                     {{ csrf_field() }}
                     <div class="form-group-lg" style="margin-bottom: 10px;">
                         <input type="text" class="form-control" name="keyword_barangay" placeholder="Search barangay..." value="{{ Session::get("keyword_barangay") }}">
@@ -15,7 +23,7 @@
                         <button type="submit" value="view_all" name="view_all" class="btn btn-warning btn-sm btn-flat">
                             <i class="fa fa-eye"></i> View All
                         </button>
-                        <a href="#facility_modal" data-toggle="modal" class="btn btn-info btn-sm btn-flat" onclick="BarangayBody('<?php echo $province_id; ?>','<?php echo $muncity_id; ?>','empty')">
+                        <a data-toggle="modal" class="btn btn-info btn-sm btn-flat" data-target="#brgy_modal">
                             <i class="fa fa-hospital-o"></i> Add Barangay
                         </a>
                     </div>
@@ -38,9 +46,12 @@
                                 <td style="white-space: nowrap;">
                                     <b>
                                         <a
-                                            href="#facility_modal"
-                                            data-toggle="modal"
-                                            onclick="BarangayBody('<?php echo $province_id; ?>','<?php echo $muncity_id; ?>','<?php echo $row->id; ?>')"
+                                           href="#"
+                                           data-toggle="modal"
+                                           data-id= "{{ $row->id }}"
+                                           class="title-info update_info"
+                                           data-target="#brgy_modal" 
+                                           onclick="getDataFromBrgy(this)" 
                                         >
                                             {{ $row->brg_name }}
                                         </a>
@@ -66,8 +77,9 @@
         </div>
     </div>
 </div>
-    @include('modal.admin.barangayModal')
+    @include('modal.superadmin.barangayModal')
 @endsection
 @section('js')
+    @include('superadmin.scripts.barangay')
 @endsection
 

@@ -12,31 +12,31 @@
     <title>DOH CHD XII – Tele Consultation System</title>
     <!-- <title>{{ (isset($title)) ? $title : 'Referral System'}}</title> -->
     <!-- SELECT 2 -->
-    <link href="{{ asset('plugin/select2/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/plugin/select2/select2.min.css') }}" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/assets/css/bootstrap-theme.min.css') }}" rel="stylesheet">
 
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('plugin/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/plugin/Ionicons/css/ionicons.min.css') }}">
 
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/dad1cf763f.js" crossorigin="anonymous"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="{{ asset('assets/css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/assets/css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.min.css') }}">
+    <link href="{{ asset('public/assets/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/AdminLTE.min.css') }}">
     <!-- bootstrap datepicker -->
 
-    <link href="{{ asset('plugin/datepicker/datepicker3.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('plugin/Lobibox/lobibox.css') }}">
+    <link href="{{ asset('public/plugin/datepicker/datepicker3.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('public/plugin/Lobibox/lobibox.css') }}">
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="{{ asset('plugin/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
-    <link href="{{ asset('plugin/daterangepicker_old/daterangepicker-bs3.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('public/plugin/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+    <link href="{{ asset('public/plugin/daterangepicker_old/daterangepicker-bs3.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('plugin/table-fixed-header/table-fixed-header.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/plugin/table-fixed-header/table-fixed-header.css') }}" rel="stylesheet">
     <title>
         @yield('title','Home')
     </title>
@@ -44,10 +44,10 @@
     @yield('css')
     <style>
         body {
-            background: url('{{ asset('img/backdrop.png') }}'), -webkit-gradient(radial, center center, 0, center center, 460, from(#ccc), to(#ddd));
+            background: url('{{ asset('public/img/backdrop.png') }}'), -webkit-gradient(radial, center center, 0, center center, 460, from(#ccc), to(#ddd));
         }
         .loading {
-            background: rgba(255, 255, 255, 0.9) url('{{ asset('img/loading.gif')}}') no-repeat center;
+            background: rgba(255, 255, 255, 0.9) url('{{ asset('public/img/loading.gif')}}') no-repeat center;
             position:fixed;
             width:100%;
             height:100%;
@@ -91,7 +91,7 @@
             <div class="col-md-4">
                 <div class="pull-left">
                     <?php
-                    $user = Auth::user();
+                    $user = Session::get('auth');
                     $t = '';
                     $dept_desc = '';
                     if($user->level=='doctor')
@@ -111,7 +111,7 @@
     </div>
     <div class="header" style="background-color:#59ab91;padding:10px;">
         <div class="container">
-            <img src="{{ asset('img/referral_banner4.png') }}" class="img-responsive" />
+            <img src="{{ asset('public/img/referral_banner4.png') }}" class="img-responsive" />
         </div>
     </div>
     <div class="container-fluid" >
@@ -139,11 +139,11 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i>&nbsp; Manage <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('users') }}"><i class="fas fa-users"></i>&nbsp; Users</a></li>
+                        <li><a href="{{ asset('users') }}"><i class="fas fa-users"></i>&nbsp; Users</a></li>
                         <li><a href="#"><i class="fas fa-user-check"></i>&nbsp; User Approval</a></li>
                         <li><a href="#"><i class="fa fa-list-alt"></i>Role/Permission</a></li>
-                        <li><a href="{{ url('facilities') }}"><i class="fa fa-hospital-o"></i>&nbsp; Facilities</a></li>
-                        <li><a href="{{ url('provinces') }}"><i class="fa fa-hospital-o"></i>&nbsp; Province</a></li>
+                        <li><a href="{{ asset('facilities') }}"><i class="fa fa-hospital-o"></i>&nbsp; Facilities</a></li>
+                        <li><a href="{{ asset('provinces') }}"><i class="fa fa-hospital-o"></i>&nbsp; Province</a></li>
                         <li class="dropdown-submenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="nav-label"><i class="fa fa-hospital-o"></i>&nbsp;&nbsp;&nbsp; Municipality</span></a>
                             <ul class="dropdown-menu">
@@ -175,7 +175,7 @@
                 </li>
                 @endif
                 <!-- for rhu -->
-                @if($user->level=='rhu')
+                @if($user->level=='admin')
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-address-book"></i> RHU <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
@@ -186,9 +186,10 @@
                 </li>
                 @endif
                 <!-- For doctors and rhu -->
-                @if($user->level=='doctor' || $user->level=='rhu')
+                @if($user->level=='doctor' || $user->level=='admin')
                 <li><a href="#"><i class="fas fa-comment-dots"></i> Feedback</a></li>
                 @endif
+                <li><a href="{{ asset('logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -210,30 +211,30 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="{{ asset('assets/js/jquery.min.js?v='.date('mdHis')) }}"></script>
+<script src="{{ asset('public/assets/js/jquery.min.js?v='.date('mdHis')) }}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="{{ asset('plugin/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('public/plugin/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
 
-<script src="{{ asset('assets/js/jquery.form.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery-validate.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('public/assets/js/jquery.form.min.js') }}"></script>
+<script src="{{ asset('public/assets/js/jquery-validate.js') }}"></script>
+<script src="{{ asset('public/assets/js/bootstrap.min.js') }}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{{ asset('assets/js/ie10-viewport-bug-workaround.js') }}"></script>
-<script src="{{ asset('assets/js/script.js') }}?v=1"></script>
+<script src="{{ asset('public/assets/js/ie10-viewport-bug-workaround.js') }}"></script>
+<script src="{{ asset('public/assets/js/script.js') }}?v=1"></script>
 
-<script src="{{ asset('plugin/Lobibox/Lobibox.js') }}?v=1"></script>
-<script src="{{ asset('plugin/select2/select2.min.js') }}?v=1"></script>
+<script src="{{ asset('public/plugin/Lobibox/Lobibox.js') }}?v=1"></script>
+<script src="{{ asset('public/plugin/select2/select2.min.js') }}?v=1"></script>
 
 <!-- Bootstrap WYSIHTML5 -->
-<script src="{{ asset('plugin/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}?v=1"></script>
+<script src="{{ asset('public/plugin/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}?v=1"></script>
 
-<script src="{{ url('plugin/daterangepicker_old/moment.min.js') }}"></script>
-<script src="{{ url('plugin/daterangepicker_old/daterangepicker.js') }}"></script>
+<script src="{{ url('public/plugin/daterangepicker_old/moment.min.js') }}"></script>
+<script src="{{ url('public/plugin/daterangepicker_old/daterangepicker.js') }}"></script>
 
-<script src="{{ asset('assets/js/jquery.canvasjs.min.js') }}?v=1"></script>
+<script src="{{ asset('public/assets/js/jquery.canvasjs.min.js') }}?v=1"></script>
 
 <!-- TABLE-HEADER-FIXED -->
-<script src="{{ asset('plugin/table-fixed-header/table-fixed-header.js') }}"></script>
+<script src="{{ asset('public/plugin/table-fixed-header/table-fixed-header.js') }}"></script>
 
 <script>
     $(document).ready(function() {

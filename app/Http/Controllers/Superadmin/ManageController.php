@@ -20,7 +20,7 @@ class ManageController extends Controller
 	//Start User Module
     public function indexUser(Request $request) {
     	$users = User::all();
-    	$keyword = $request->search;
+        $keyword = $request->search;
         $data = new User();
         if($keyword){
             $data = $data
@@ -115,7 +115,7 @@ class ManageController extends Controller
         $data = $data->orderBy('facilityname','asc')
             ->paginate(20);
         $province = Province::all();
-        return view('admin.facility',[
+        return view('superadmin.facility',[
             'title' => 'List of Facility',
             'data' => $data,
             'province' => $province,
@@ -197,7 +197,7 @@ class ManageController extends Controller
         $data = Province::where('prov_name',"like","%$keyword%")
             ->orderBy("prov_name","asc")
             ->paginate(20);
-        return view('admin.provinces',[
+        return view('superadmin.provinces',[
             'title' => 'List of Province',
             'provinces' => $provinces,
             'data' => $data
@@ -247,7 +247,7 @@ class ManageController extends Controller
             ->orderBy("muni_name","asc")
             ->paginate(20);
 
-        return view('admin.municipality',[
+        return view('superadmin.municipality',[
             'title' => 'List of Municipality',
             'province_name' => $province_name,
             'province_id' => $province_id,
@@ -280,7 +280,7 @@ class ManageController extends Controller
             ->orderBy("brg_name","asc")
             ->paginate(20);
 
-        return view('admin.barangays',[
+        return view('superadmin.barangays',[
             'title' => 'List of Barangay',
             'province_name' => $province_name,
             'province_id' => $province_id,

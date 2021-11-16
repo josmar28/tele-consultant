@@ -13,7 +13,7 @@
     <div class="box box-success">
         <div class="box-header with-border">
             <div class="pull-right">
-                <form action="{{ url('/facilities') }}" method="GET" class="form-inline">
+                <form action="{{ asset('/facilities') }}" method="GET" class="form-inline">
                     {{ csrf_field() }}
                     <div class="form-group-lg" style="margin-bottom: 10px;">
                         <input type="text" class="form-control" name="keyword" placeholder="Search Facility name..." value="{{ Session::get("keyword") }}">
@@ -137,9 +137,9 @@
         </div>
     </div>
 </div>
-    @include('modal.admin.facilityModal')
+    @include('modal.superadmin.facilityModal')
 @endsection
 @section('js')
-@include('admin.scripts.facilities')
+@include('superadmin.scripts.facilities')
 @endsection
 
