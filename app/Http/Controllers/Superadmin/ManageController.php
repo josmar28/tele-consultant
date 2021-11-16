@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Superadmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use App\Barangay;
 use App\Facility;
 use App\MunicipalCity;
@@ -14,8 +16,9 @@ class ManageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        //$this->middleware('doctor');
+        if(!$login = Session::get('auth')){
+            $this->middleware('auth');
+        }
     }
 	//Start User Module
     public function indexUser(Request $request) {
@@ -57,6 +60,18 @@ class ManageController extends Controller
         ]);
     }
 
+    public function deactivateUser($id) {
+        $user = User::find($id);
+        $is = $user->status == 'deactivate' ? 'active' : 'deactivate';
+        $msg = $user->status == 'deactivate' ? 'Successfully activate account' : 'Successfully deactivate account';
+        $act = $user->status == 'deactivate' ? 'action_made' : 'deactivate';
+        $data = array(
+            'status' => $is
+        );
+        $user->update($data);
+        Session::put($act, $msg);
+
+    }
     public function storeUser(Request $req) {
     	$facility = Facility::find($req->facility_id);
         $data = array(

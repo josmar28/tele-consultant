@@ -38,6 +38,7 @@ Route::get('/logout', function(){
 // SuperSuperadmin Module
 Route::get('superadmin','Superadmin\HomeController@index');
 Route::get('/users', 'Superadmin\ManageController@indexUser');
+Route::post('/user-deactivate/{id}', 'Superadmin\ManageController@deactivateUser');
 Route::post('/user-store', 'Superadmin\ManageController@storeUser');
 Route::get('/facilities', 'Superadmin\ManageController@indexFacility');
 Route::get('/facilities/{id}/{type}', 'Superadmin\ManageController@getMunandBrgy');
