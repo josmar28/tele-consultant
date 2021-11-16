@@ -131,9 +131,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book"></i>&nbsp; Library <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fas fa-chart-line"></i>&nbsp; Diagnosis</a></li>
                         <li><a href="#"><i class="fas fa-medkit"></i>&nbsp; Drugs/Meds</a></li>
                         <li><a href="#"><i class="fas fa-chart-area"></i>&nbsp; Demographic</a></li>
-                        <li><a href="#"><i class="fas fa-chart-line"></i>&nbsp; Diagnosis</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -163,27 +163,41 @@
                     </ul>
                 </li>
                 @endif
-                <!-- for doctors -->
-                @if($user->level=='doctor')
-                <li><a href="{{ asset('doctor') }}"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-thumbs-up"></i> Telemed Approval <i class="fas fa-caret-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fas fa-tasks"></i> Plan Management</a></li>
-                        <li><a href="#"><i class="fas fa-prescription"></i> Prescription</a></li>
-                        <li><a href="#"><i class="fas fa-paperclip"></i> Attachments(Ex. Lab result etc)</a></li>
-                    </ul>
-                </li>
-                @endif
-                <!-- for rhu -->
+                <!-- for admin -->
                 @if($user->level=='admin')
                 <li><a href="{{ asset('admin') }}"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-address-book"></i> RHU <i class="fas fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i>&nbsp; Manage <i class="fas fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-file-o"></i> View Management</a></li>
-                        <li><a href="#"><i class="fas fa-file-prescription"></i> View Prescription</a></li>
-                        <li><a href="#"><i class="fas fa-file-upload"></i> Upload Attachment</a></li>
+                        <li><a href="#"><i class="fas fa-user-md"></i>&nbsp; Doctors</a></li>
+                        <li><a href="#"><i class="fa fa-hospital-o"></i>&nbsp; Facility</a></li>
+                    </ul>
+                </li>
+                @endif
+                <!-- for doctors -->
+                @if($user->level=='doctor')
+                <li><a href="{{ asset('doctor') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-phone-alt"></i> Teleconsultation</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i>&nbsp; Manage <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="far fa-address-card"></i> Patient</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-paste"></i>&nbsp; Reports <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Daily Transaction</a></li>
+                    </ul>
+                </li>
+                @endif
+                @if($user->level=='patient')
+                <li><a href="{{ asset('doctor') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i>&nbsp; Manage <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="far fa-address-card"></i> Patient</a></li>
+                        <li><a href="#"><i class="fas fa-paperclip"></i> Attachments</a></li>
                     </ul>
                 </li>
                 @endif

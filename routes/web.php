@@ -51,6 +51,8 @@ Route::match(['GET','POST'],'/municipality/{province_id}/{province_name}','Super
 Route::post('/municipality-store', 'Superadmin\ManageController@storeMunicipality');
 Route::post('/municipality-delete/{id}', 'Superadmin\ManageController@deleteMunicipality');
 Route::match(['GET','POST'],'/barangay/{prov_id}/{prov_name}/{mun_id}/{mun_name}','Superadmin\ManageController@viewBarangay');
+Route::post('/barangay-store', 'Superadmin\ManageController@storeBarangay');
+Route::post('/barangay-delete/{id}', 'Superadmin\ManageController@deleteBarangay');
 
 //Admin Module
 Route::get('admin','Admin\HomeController@index');

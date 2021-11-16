@@ -30,8 +30,8 @@
 		e.preventDefault();
 		var id = $("#brgy_id").val();
 		if(toDelete) {
-			$('#muni_form').ajaxSubmit({
-	            url:  "{{ url('/barangay-delete') }}/"+id,,
+			$('#brgy_form').ajaxSubmit({
+	            url:  "{{ url('/barangay-delete') }}/"+id,
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){
