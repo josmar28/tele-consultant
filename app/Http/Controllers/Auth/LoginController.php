@@ -62,7 +62,7 @@ class LoginController extends Controller
                 if($login->level=='superadmin')
                     return redirect('superadmin');
                 if($login->level=='admin' && $login->status=='active')
-                    return redirect('admin' && $login->status=='active');
+                    return redirect('admin');
                 else if($login->level=='doctor' && $login->status=='active')
                     return redirect('doctor');
                 else if($login->level=='officer' && $login->status=='active')

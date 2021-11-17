@@ -223,7 +223,8 @@ class ManageController extends Controller
         $province = Province::find($req->province_id);
         $data = array(
             'prov_psgc' => $req->prov_psgc,
-            'prov_name' => $req->prov_name
+            'prov_name' => $req->prov_name,
+            'reg_psgc' => '120000000'
         );
         if(!$req->province_id){
             Session::put("action_made","Successfully added new province");
@@ -331,6 +332,32 @@ class ManageController extends Controller
         $muni = MunicipalCity::find($id);
         $muni->delete();
         Session::put("delete_action","Successfully delete Municipality");
+    }
+
+    public function storeBarangay(Request $req) {
+        $barangay = Barangay::find($req->brgy_id);
+        $data = array(
+            'brg_psgc' => $req->brg_psgc,
+            'brg_name' => $req->brg_name,
+            'brg_void' => '0',
+            'prov_psgc' => $req->prov_psgc,
+            'muni_psgc' => $req->muni_psgc,
+            'reg_psgc' => '120000000'
+        );
+        if(!$req->brgy_id){
+            Session::put("action_made","Successfully added new barangay");
+            Barangay::create($data);
+        }
+        else{
+            Session::put("action_made","Successfully updated barangay");
+            Barangay::find($req->brgy_id)->update($data);
+        }
+    }
+
+    public function deleteBarangay($id) {
+        $brgy = Barangay::find($id);
+        $brgy->delete();
+        Session::put("delete_action","Successfully delete Barangay");
     }
 
 }
