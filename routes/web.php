@@ -58,6 +58,9 @@ Route::get('admin','Admin\HomeController@index');
 // Doctor Module
 Route::get('doctor','Doctor\HomeController@index');
 
-// Patient Module
+// Patient Module 
 Route::get('patient','Patient\HomeController@index');
+Route::get('patient/list','Patient\PatientController@patientList');
+Route::post('doctor/patient/update','Patient\PatientController@patientUpdate');
+Route::get('location/barangay/{muncity_id}','Patient\PatientController@getBaranggays');
 
