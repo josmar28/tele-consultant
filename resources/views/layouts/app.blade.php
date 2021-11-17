@@ -174,6 +174,12 @@
                         <li><a href="#"><i class="fas fa-paperclip"></i> Attachments(Ex. Lab result etc)</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-thumbs-up"></i> Patient Management <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ asset('patient/list') }}"><i class="fas fa-tasks"></i> List of Patients</a></li>
+                    </ul>
+                </li>
                 @endif
                 <!-- for rhu -->
                 @if($user->level=='admin')
@@ -190,6 +196,11 @@
                 <!-- For doctors and rhu -->
                 @if($user->level=='doctor' || $user->level=='admin')
                 <li><a href="#"><i class="fas fa-comment-dots"></i> Feedback</a></li>
+                @endif
+                @if($user->level=='patient')
+                <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fa fa-home"></i> Medical Records & Attachments</a></li>
+                <li><a href="#"><i class="fa fa-home"></i> Settings</a></li>
                 @endif
                 <li><a href="{{ asset('logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
             </ul>
