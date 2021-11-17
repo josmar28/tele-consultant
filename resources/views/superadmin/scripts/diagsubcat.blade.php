@@ -1,6 +1,6 @@
 <script>
-  var barangays = {!! json_encode($barangays->toArray()) !!};
-  var toDelete;
+	var subcats = {!! json_encode($subcats->toArray()) !!};
+	var toDelete;
 	@if(Session::get('action_made'))
         Lobibox.notify('success', {
             title: "",
@@ -26,12 +26,12 @@
     $( "#deleteBtn" ).click(function() {
 		toDelete = 'yes';
 	});
-	$('#brgy_form').on('submit',function(e){
+	$('#sub_cat_form').on('submit',function(e){
 		e.preventDefault();
-		var id = $("#brgy_id").val();
 		if(toDelete) {
-			$('#brgy_form').ajaxSubmit({
-	            url:  "{{ url('/barangay-delete') }}/"+id,
+			var id = $("#sub_id").val();
+			$('#sub_cat_form').ajaxSubmit({
+	            url:  "{{ url('/sub-cat-delete') }}/"+id,
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){
@@ -40,8 +40,8 @@
 	            },
 	        });
 		} else {
-			$('#brgy_form').ajaxSubmit({
-	            url:  "{{ url('/barangay-store') }}",
+			$('#sub_cat_form').ajaxSubmit({
+	            url:  "{{ url('/sub-cat-store') }}",
 	            type: "POST",
 	            success: function(data){
 	                setTimeout(function(){
@@ -52,23 +52,24 @@
 		}
 	});
 
-	function getDataFromBrgy(ele) {
-		$("#myModalLabel").html('Update Barangay');
-    	$("#brgy_id").val($(ele).data('id'));
+	function getDataFromData(ele) {
+		$("#myModalLabel").html('Update Diagnosis');
+    	$("#sub_id").val($(ele).data('id'));
+    	$("#deleteBtn").removeClass("hide");
     	const edit = [];
-    	$.each(barangays, function(key, value) {
+    	$.each(subcats, function(key, value) {
 	        if(value.id == $(ele).data('id')) {
 	        	edit.push(value);
 	        }
 	    });
-	    $("input[name=brg_name]").val(edit[0].brg_name);
-	    $("input[name=brg_psgc]").val(edit[0].brg_psgc);
-	    $("#deleteBtn").removeClass("hide");
+	    $("input[name=diagsubcat]").val(edit[0].diagsubcat);
+	    $("input[name=diagscatdesc]").val(edit[0].diagscatdesc);
+	    $("[name=diagmcat]").select2().select2('val', edit[0].diagmcat);
 	}
-	$('#brgy_modal').on('hidden.bs.modal', function () {
-		$("#myModalLabel").html('Add Barangay');
-		$("input[name=brg_name]").val('');
-	    $("input[name=brg_psgc]").val('');
-	    $("#deleteBtn").removeClass("hide");
+	$('#main_cat_modal').on('hidden.bs.modal', function () {
+		$("#deleteBtn").addClass("hide");
+		$("input[name=diagsubcat]").val('');
+	    $("input[name=diagscatdesc]").val('');
+	    $("[name=diagmcat]").select2().select2('val', '');
 	});
 </script>
